@@ -1,17 +1,21 @@
 var express = require("express");
 var app = express();
 var connected= require("../db");
-var createResult = require("../ultis");
 app.use(express.json());
 
 app.get('/', (req, res) => {
     const connection = connected.connected();
-    var result = {};
     statement = `select * from student`;
     connection.query(statement,(error,data) => {
         connection.end();
-       result = createResult.createResult(error,data);
-       res.send(result);
+         if (error == null)
+         {
+           res.send(JSON.stringify(data));
+         }
+         else
+         {
+            res.send(JSON.stringify(error));
+         }
     });
 });
 
@@ -22,8 +26,14 @@ app.post('/', (req, res) => {
     statement = `insert into student(name,marks) value('${name}',${marks})`;
     connection.query(statement,(error,data) => {
         connection.end();
-       result = createResult.createResult(error,data);
-       res.send(result);
+        if (error == null)
+        {
+          res.send(JSON.stringify(data));
+        }
+        else
+        {
+           res.send(JSON.stringify(error));
+        }
     });
 });
 
@@ -35,8 +45,14 @@ app.put('/:rollno', (req, res) => {
     statement = `update student set name = '${name}',marks = ${marks} where rollno = ${rollno}`;
     connection.query(statement,(error,data) => {
         connection.end();
-       result = createResult.createResult(error,data);
-       res.send(result);
+        if (error == null)
+         {
+           res.send(JSON.stringify(data));
+         }
+         else
+         {
+            res.send(JSON.stringify(error));
+         }
     });
 });
 
@@ -47,8 +63,14 @@ app.delete('/:rollno', (req, res) => {
     statement = `delete from student where rollno = ${rollno}`;
     connection.query(statement,(error,data) => {
         connection.end();
-       result = createResult.createResult(error,data);
-       res.send(result);
+        if (error == null)
+         {
+           res.send(JSON.stringify(data));
+         }
+         else
+         {
+            res.send(JSON.stringify(error));
+         }
     });
 });
 
