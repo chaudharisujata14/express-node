@@ -2,13 +2,13 @@ function createResult(error,data) {
     const result = {};
     if(error)
     {
-        result['status'] = "error";
-        result['error'] = error;
+        result['s'] = "error";
+        result['e'] = error;
     }
     else
     {
-        result['status'] = "success";
-        result['data'] = data;
+        result['s'] = "success";
+        result['d'] = data;
     }
     return result;
 }

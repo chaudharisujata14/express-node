@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clear
-pm2 describe server.js > /dev/null
+pm2 describe server > /dev/null
 
 if [ $? -ne '0' ]; then
 pm2 start server.js
